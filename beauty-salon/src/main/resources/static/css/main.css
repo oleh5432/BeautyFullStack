@@ -1,0 +1,81 @@
+/*@import url(main.css);*/
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+a {
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+    /*color: rgba(10, 12, 20, 0.91);*/
+    width: 100%;
+
+}
+
+.product-timeMinutes,.product-price ,#h3 {text-align: center;}
+
+#h3 {
+
+    margin: auto;
+    text-shadow: 1px 1px 2px #82c0ff;
+}
+
+#header-item:hover {
+    /*text-decoration: underline; !* Делает ссылку подчеркнутой при наведении на нее курсора *!*/
+    color: #450859; /* Цвет ссылки */
+}
+
+.controllers {
+    /*display: flex;*/
+    /*justify-content: space-evenly;*/
+    /*flex-wrap: wrap;*/
+}
+
+.product {
+    width: 31%;
+    margin-bottom: 40px;
+}
+
+.product-image {
+    width: 100%;
+    /*width: 200px;*/
+    height: 300px;
+    border-radius: 8px;
+}
+
+
+/*#navbar ul{*/
+/*    display: none;*/
+/*    background-color: #f90;*/
+/*    position: absolute;*/
+/*    top: 100%;*/
+/*}*/
+/*#navbar li:hover ul { display: block; }*/
+/*#navbar, #navbar ul{*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    list-style-type: none;*/
+/*}*/
+/*#navbar {*/
+/*    height: 30px;*/
+/*    background-color: #666;*/
+/*    padding-left: 25px;*/
+/*    min-width: 470px;*/
+/*}*/
+/*#navbar li {*/
+/*    float: left;*/
+/*    position: relative;*/
+/*    height: 100%;*/
+/*}*/
+/*#navbar li a {*/
+/*    display: block;*/
+/*    padding: 6px;*/
+/*    width: 100px;*/
+/*    color: #fff;*/
+/*    text-decoration: none;*/
+/*    text-align: center;*/
+/*}*/
+/*#navbar ul li { float: none; }*/
+/*#navbar li:hover { background-color: #f90; }*/
+/*#navbar ul li:hover { background-color: #666; }*/

@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Категорії</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <header>
+        <ul id="navbar">
+            <li><a href="/">Головна</a></li>
+            <li><a href="#">Новини</a></li>
+            <li><a href="">Послуги</a>
+                <ul>
+                    <li><a href="/all-products">Всі послуги</a></li>
+                    <ul id="sections">
+                        <!--                            <li><a href="#">Перукарські послуги</a></li>-->
+                        <!--                            <li><a href="#">Візаж</a></li>-->
+                        <!--                            <li><a href="#">Манікюр</a></li>-->
+                    </ul>
+                </ul>
+            </li>
+            <li><a href="#">Про нас</a></li>
+            <li><a href="/admin">Адміністратор</a></li>
+            <li><a href="/login">Увійти</a></li>
+        </ul>
+    </header>
+
+    <aside>
+    </aside>
+
+    <main>
+        <div class="menu">
+            <a href="/create-product"><button class="menu-button" id="openCreateProduct">Керувати послугами</button></a>
+            <a href="/create-category"><button class="menu-button" id="openCreateCategory">Керувати категоріями</button></a>
+        </div>
+        <div>
+            <form>
+                <label for="nameCategory">Назва категорії </label>
+                <input type="text" id="nameCategory" name="name" placeholder="Name..">
+                <select id="sectionsId">
+
+                </select>
+                <label for="getFileCategory">Додати зображення</label>
+                <input type="file" id="getFileCategory">
+                <input type="button" id="buttonCreateCategory" value="Створити категорію">
+            </form>
+        </div>
+
+        <table id="categoriesAll">
+            <thead>
+            <tr>
+                <th>id категорії</th>
+                <th>Назва категорії</th>
+                <th>Розділ</th>
+                <th>Зображення</th>
+                <th>Кнопка для видалення</th>
+                <th>Кнопка для оновлення</th>
+            </tr>
+            </thead>
+            <tbody id="allElements"></tbody>
+        </table>
+
+        <!-- The Modal update-->
+        <div id="modalUpdate" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="closeModalUpdate" class="close">&times;</span>
+                    <h2>Оновити категорію</h2>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form>
+                            <label for="categoryId">id категорії</label><br>
+                            <input type="text" id="categoryId" name="categoryId" placeholder="Name.." value="0" readonly><br>
+                            <label for="nameUpdate">Назва категорії</label><br>
+                            <input type="text" id="nameUpdate" name="name" placeholder="Name.."><br>
+                            <label for="sectionsIdUpdate">Розділ</label><br>
+                            <select id="sectionsIdUpdate">
+
+                            </select><br>
+                            <label for="getFileUpdate">Додати зображення</label>
+                            <input type="file" id="getFileUpdate">
+                            <input type="button" id="btnUpdateButton" value="Оновити">
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <h3>Форма для оновлення категорії</h3>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- The Modal Img-->
+        <div id="imgModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="closeImgModal" class="close">&times;</span>
+                    <h2>Перегляд зображення</h2>
+                </div>
+                <div class="modal-body">
+                    <div id="img-container">
+
+                        <!--<img src="http://localhost:8080/img/Весільна зачіска.jpeg" alt="no img">-->
+                        <img src="" alt="">
+                    </div>
+                    <div id="img-switch">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <h3>Форма для перегляду зображення</h3>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+</div>
+
+    <script src="scriptAdminCategoryPage.js"></script>
+</body>
+</html>
+

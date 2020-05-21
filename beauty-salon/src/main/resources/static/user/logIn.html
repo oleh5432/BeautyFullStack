@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Авторизація</title>
+</head>
+<body>
+<div id="wrapper">
+    <header>
+        <ul id="navbar">
+            <li><a href="/">Головна</a></li>
+            <li><a href="#">Новини</a></li>
+            <li><a href="">Послуги</a>
+                <ul>
+                    <li><a href="/all-products">Всі послуги</a></li>
+                    <ul id="sections">
+                        <!--                            <li><a href="#">Перукарські послуги</a></li>-->
+                        <!--                            <li><a href="#">Візаж</a></li>-->
+                        <!--                            <li><a href="#">Манікюр</a></li>-->
+                    </ul>
+                </ul>
+            </li>
+            <li><a href="#">Про нас</a></li>
+            <li><a href="/admin">Адміністратор</a></li>
+            <li id="header-login"><a href="/user/login">Увійти</a></li>
+            <li id="header-logout"><a href="/logout">Вийти</a></li>
+<!--            <li id="header-logout"><a href="/logout">Вийти</a></li>-->
+        </ul>
+    </header>
+
+    <aside>
+    </aside>
+
+    <main>
+        <div class="login-page">
+            <div class="form">
+                <form class="register-form">
+                    <input type="text" id="name-r" placeholder="Ім'я"/>
+                    <input type="text" id="phoneNumber-r" placeholder="номер телефону"/>
+                    <input type="text" id="email-r" placeholder="адреса електронної пошти"/>
+                    <input type="text" id="login-r" placeholder="логін"/>
+                    <input type="password" id="password-r" placeholder="пароль"/>
+                    <button id="register-btn">Створити</button>
+                    <p class="message">Вже зареєстровані? <a href="#"> Увійти</a></p>
+                </form>
+                <form class="login-form">
+                    <input type="text" id="login-l" placeholder="логін"/>
+                    <input type="password" id="password-l" placeholder="пароль"/>
+                    <button id="login-btn">Увійти</button>
+                    <p class="message">Якщо ви не зараєстровані? <a href="#"> <br>Створити користувача</a></p>
+                    <p>Увійти за допомогою <a href="/login">Google</a></p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+</div>
+<script>
+    $('.message a').click(function(){
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
+
+    // const API_URL = "http://localhost:8080";
+    let mainUrl = "http://localhost:8080";
+
+
+    setActionOnRegisterBtn();
+    setActionOnLoginBtn();
+
+    // window.localStorage.setItem("token", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvbGVoIiwicm9sZXMiOlsiQURNSU4iXSwiaWF0IjoxNTgzNzc2OTE4LCJleHAiOjE2MjY5NzY5MTh9.aDTajE2_1zCvxJ0_LnJ8Alh0_zyPgF18wMdFKr1HCmE");
+
+
+
+    function setActionOnRegisterBtn() {
+        $("#register-btn").click(function(){
+            let user = {
+                "name": $("#name-r").val(),
+                "phoneNumber": $("#phoneNumber-r").val(),
+                "email": $("#email-r").val(),
+                "username": $("#login-r").val(),
+                "password": $("#password-r").val()
+            };
+
+            $.ajax({
+                url: mainUrl + "/user/register",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(user),
+                success: function (data) {
+                    window.localStorage.setItem('token', 'Bearer ' + data.token);
+                    console.log(data);
+                    console.log('ok');
+                    //goToOtherPage(mainUrl);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    }
+
+    function setActionOnLoginBtn() {
+        $("#login-btn").click(function(){
+            let user = {
+                "username": $("#login-l").val(),
+                "password": $("#password-l").val()
+            };
+            $.ajax({
+                url: mainUrl + "/user/login",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(user),
+                success: function (data) {
+                    window.localStorage.setItem('token', 'Bearer ' + data.token);
+                    console.log('ok');
+                    goToOtherPage(mainUrl);
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    }
+
+    // $.ajax({
+    //     url: "http://localhost:8080/admin",
+    //     type: "GET",
+    //     headers:{"Authorization": localStorage.getItem('token')},
+    //     success: function (data) {
+    //         console.log('ok2');
+    //     },
+    //     error: function (error) {
+    //         console.log(error);
+    //     }
+    // });
+    function goToOtherPage(url) {
+        $.ajax({
+            url: url,
+            type: "GET",
+            headers:{"Authorization": window.localStorage.getItem('token')},
+            success: function (data) {
+                console.log('ok2');
+                // location.replace(mainUrl);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    // $.ajax({
+    //     url: "http://localhost:8080/user/secured",
+    //     type: "GET",
+    //     headers:{"Authorization": window.localStorage.getItem('token')},
+    //     success: function (data) {
+    //         console.log('ok');
+    //         // location.reload();
+    //     },
+    //     error: function (error) {
+    //         console.log(error);
+    //     }
+    // });
+
+    // $.ajax({
+    //     url: "http://localhost:8080/user/secured1",
+    //     type: "GET",
+    //     headers:{"Authorization": window.localStorage.getItem('token')},
+    //     success: function (data) {
+    //         console.log('ok1');
+    //         // location.reload();
+    //     },
+    //     error: function (error) {
+    //         console.log(error);
+    //     }
+    // });
+    //
+    // $.ajax({
+    //     url: "http://localhost:8080/user/secured2",
+    //     type: "GET",
+    //     headers:{"Authorization": window.localStorage.getItem('token')},
+    //     success: function (data) {
+    //         console.log('ok2');
+    //         // location.reload();
+    //     },
+    //     error: function (error) {
+    //         console.log(error);
+    //     }
+    // });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!doctype HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Послуги</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <header>
+        <ul id="navbar">
+            <li><a href="/">Головна</a></li>
+            <li><a href="#">Новини</a></li>
+            <li><a href="">Послуги</a>
+                <ul>
+                    <li><a href="/all-products">Всі послуги</a></li>
+                    <ul id="sections">
+                        <!--                            <li><a href="#">Перукарські послуги</a></li>-->
+                        <!--                            <li><a href="#">Візаж</a></li>-->
+                        <!--                            <li><a href="#">Манікюр</a></li>-->
+                    </ul>
+                </ul>
+            </li>
+            <li><a href="#">Про нас</a></li>
+            <li><a href="/admin">Адміністратор</a></li>
+            <li id="header-login"><a href="/user/login">Увійти</a></li>
+            <li id="header-logout"><a href="/logout">Вийти</a></li>
+        </ul>
+    </header>
+
+    <aside>
+    </aside>
+
+    <main>
+
+        <div class="container">
+            <div class="menu">
+                <a href="/create-product"><button class="menu-button" id="openCreateProduct">Керувати послугами</button></a>
+                <a href="/create-category"><button class="menu-button" id="openCreateCategory">Керувати категоріями</button></a>
+            </div>
+
+            <div class="controllers">
+                <input type="number" id="page" value="1">
+                <select id="size">
+                    <option value="100">100</option>
+                    <option selected value="10">10</option>
+                    <option value="5">5</option>
+                    <option value="2">2</option>
+                </select>
+                <select id="direction" value="ASC">
+                    <option value="ASC">А-Я</option>
+                    <option value="DESC">Я-А</option>
+                </select>
+                <select id="fieldName" value="categoryName">
+                    <option value="categoryName">категорія</option>
+                    <option value="name">назва</option>
+                </select>
+                <select id="categoriesId" multiple size="3">
+                    <!--            <option value="categoryName" >вибір катеорії</option>-->
+                </select>
+                <!--<button id="pagination-confirm">OK</button>-->
+            </div>
+
+            <!-- Trigger/Open The Modal -->
+            <button id="openModal">Створити послугу</button>
+            <!--    <button id="openModalUpdate">Оновити послугу</button>-->
+
+
+            <!--    <button class="menu-button" id="img2">img</button>-->
+
+
+            <!-- The Modal Create-->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span id="closeModal" class="close">&times;</span>
+                        <h2>Створити послугу</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <form>
+                                <label for="name">Назва послуги</label>
+                                <input type="text" id="name" name="name" placeholder="Name..">
+
+                                <label for="categoryName">Назва категорії</label>
+                                <select id="categoryName">
+                                </select><br>
+
+                                <label for="timeMinutes">Тривалість, хв</label>
+                                <input type="text" id="timeMinutes" name="timeMinutes" placeholder="Time.."><br>
+                                <!--                        <label for="startTime">Час початку</label><br>-->
+                                <!--                        <input type="text" id="startTime" name="startTime" placeholder="Start Time"><br>-->
+                                <label for="price">Ціна, грн</label>
+                                <input type="number" id="price" name="price" placeholder="Price"><br>
+                                <!--                        <label for="categoryId">id категорії</label><br>-->
+                                <!--                        <input type="number" id="categoryId" name="categoryId" placeholder="Category id">-->
+                                <!--                        <input type="button" id="selectCategory" value="Вибрати категорію"><br>-->
+                                <label for="getFile">Додати зображення</label>
+                                <input type="file" id="getFile">
+                                <input type="button" id="btnCreateProduct" value="Створити">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <h3>Форма для створення нової послуги</h3>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- The Modal Img-->
+            <div id="imgModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span id="closeImgModal" class="close">&times;</span>
+                        <h2>Перегляд зображення</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div id="img-container">
+
+                            <!--<img src="http://localhost:8080/img/Весільна зачіска.jpeg" alt="no img">-->
+                            <img src="" alt="">
+                        </div>
+                        <div id="img-switch">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <h3>Форма для перегляду зображення</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Modal update-->
+            <div id="modalUpdate" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span id="closeModalUpdate" class="close">&times;</span>
+                        <h2>Оновити послугу</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <form>
+                                <label for="productId">id послуги</label>
+                                <input type="text" id="productId" name="productId" placeholder="Name.." value="0" readonly><br>
+                                <label for="nameUpdate">Назва послуги</label>
+                                <input type="text" id="nameUpdate" name="name" placeholder="Name..">
+
+                                <label for="categoryNameUpdate">Назва категорії</label>
+                                <select id="categoryNameUpdate">
+                                </select><br>
+
+                                <label for="timeMinutesUpdate">Тривалість, хв</label>
+                                <input type="text" id="timeMinutesUpdate" name="timeMinutes" placeholder="Time.."><br>
+                                <label for="priceUpdate">Ціна, грн</label>
+                                <input type="number" id="priceUpdate" name="price" placeholder="Price"><br>
+                                <label for="getFileUpdate">Додати зображення</label>
+                                <input type="file" id="getFileUpdate">
+                                <input type="button" id="btnUpdateButton" value="Оновити">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <h3>Форма для оновлення послуги</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <table id="products">
+                <thead>
+                <tr>
+                    <th>Назва послуги</th>
+                    <th>Тривалість, хв</th>
+                    <th>Ціна, грн</th>
+                    <th>Категорія</th>
+                    <th>Зображення</th>
+                    <th>Кнопка для видалення</th>
+                    <th>Кнопка для оновлення</th>
+                </tr>
+                </thead>
+                <tbody id="allElementsProducts"></tbody>
+            </table>
+        </div>
+
+
+        <!--    <input type="date">-->
+        <!--    <span></span>-->
+    </main>
+
+    <footer>
+    </footer>
+</div>
+    <script src="js/scriptAdminProductPage.js"></script>
+</body>
+</html>
