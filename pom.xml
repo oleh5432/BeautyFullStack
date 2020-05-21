@@ -28,7 +28,7 @@
     </properties>
 
     <modules>
-<!--        <module>frontend</module>-->
+        <module>frontend</module>
         <module>beauty-salon</module>
     </modules>
 
