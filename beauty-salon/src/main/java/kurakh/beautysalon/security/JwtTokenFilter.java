@@ -2,6 +2,7 @@ package kurakh.beautysalon.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -21,14 +22,19 @@ public class JwtTokenFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
             throws IOException, ServletException {
-
-        String token = jwtTokenTool.getTokenByBody((HttpServletRequest) req);
-        if (token != null && jwtTokenTool.isTokenValid(token)) {
-            Authentication auth = jwtTokenTool.getAuthentication(token);
-            if (auth != null) {
-                SecurityContextHolder.getContext().setAuthentication(auth);
+        try {
+            String token = jwtTokenTool.getTokenByBody((HttpServletRequest) req);
+            if (token != null && jwtTokenTool.validateJwtToken(token)) {
+                Authentication auth = jwtTokenTool.getAuthentication(token);
+//            auth.setDetails(new WebAuthenticationDetailsSource().buildDetails((HttpServletRequest)req));
+                if (auth != null) {
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
             }
+        } catch (Exception e) {
+            logger.error("Cannot set user authentication: {}", e);
         }
+
         filterChain.doFilter(req, res);
     }
 }
